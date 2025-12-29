@@ -1,0 +1,23 @@
+# Build outputs
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Binaries and libs
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+
+# Debug
+*.dSYM/
+
+# IDE/editor
+.DS_Store
+.vscode/
+.idea/
