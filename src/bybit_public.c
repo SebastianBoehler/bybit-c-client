@@ -85,6 +85,62 @@ char *bybit_public_build_kline_query(const char *category,
     return buf;
 }
 
+char *bybit_public_build_recent_trades_query(const char *category,
+                                             const char *symbol,
+                                             const char *limit)
+{
+    if (!category || !symbol)
+        return NULL;
+    size_t len = strlen("category=") + strlen(category) +
+                 strlen("&symbol=") + strlen(symbol) + 1;
+    if (limit)
+        len += strlen("&limit=") + strlen(limit);
+    char *buf = (char *)malloc(len);
+    if (!buf)
+        return NULL;
+    int written = snprintf(buf, len, "category=%s&symbol=%s", category, symbol);
+    size_t offset = written > 0 ? (size_t)written : 0;
+    if (limit)
+        snprintf(buf + offset, len - offset, "&limit=%s", limit);
+    return buf;
+}
+
+char *bybit_public_build_funding_query(const char *category,
+                                       const char *symbol,
+                                       const char *limit)
+{
+    if (!category || !symbol)
+        return NULL;
+    size_t len = strlen("category=") + strlen(category) +
+                 strlen("&symbol=") + strlen(symbol) + 1;
+    if (limit)
+        len += strlen("&limit=") + strlen(limit);
+    char *buf = (char *)malloc(len);
+    if (!buf)
+        return NULL;
+    int written = snprintf(buf, len, "category=%s&symbol=%s", category, symbol);
+    size_t offset = written > 0 ? (size_t)written : 0;
+    if (limit)
+        snprintf(buf + offset, len - offset, "&limit=%s", limit);
+    return buf;
+}
+
+char *bybit_public_build_open_interest_query(const char *category,
+                                             const char *symbol,
+                                             const char *interval_time)
+{
+    if (!category || !symbol || !interval_time)
+        return NULL;
+    size_t len = strlen("category=") + strlen(category) +
+                 strlen("&symbol=") + strlen(symbol) +
+                 strlen("&intervalTime=") + strlen(interval_time) + 1;
+    char *buf = (char *)malloc(len);
+    if (!buf)
+        return NULL;
+    snprintf(buf, len, "category=%s&symbol=%s&intervalTime=%s", category, symbol, interval_time);
+    return buf;
+}
+
 int bybit_get_server_time(BybitClient *client,
                           char **out_response,
                           long *out_status_code)
